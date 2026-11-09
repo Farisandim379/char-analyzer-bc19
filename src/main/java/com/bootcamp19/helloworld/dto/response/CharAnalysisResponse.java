@@ -12,7 +12,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class CharAnalysisResponse {
     private Long id;
-    private String kata;
+    private String kalimat;
     private int totalHuruf;
     private Map<Character, Integer> frekuensi;
 

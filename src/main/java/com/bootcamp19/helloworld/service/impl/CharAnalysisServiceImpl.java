@@ -1,5 +1,6 @@
 package com.bootcamp19.helloworld.service.impl;
 
+import com.bootcamp19.helloworld.dto.request.CharAnalysisRequest;
 import com.bootcamp19.helloworld.dto.response.CharAnalysisResponse;
 import com.bootcamp19.helloworld.entity.CharAnalysis;
 import com.bootcamp19.helloworld.repository.CharAnalysisRepository;
@@ -8,6 +9,7 @@ import com.bootcamp19.helloworld.util.CharCounter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,20 @@ public class CharAnalysisServiceImpl implements CharAnalysisService {
             hasil.add(toResponse(data));
         }
         return hasil;
+    }
+
+    @Override
+    public CharAnalysisResponse simpan(CharAnalysisRequest request) {
+        String kalimat = request != null ? request.getKalimat() : "";
+        CharCounter counter = new CharCounter(kalimat);
+
+        CharAnalysis entity = new CharAnalysis();
+        entity.setKalimat(kalimat);
+        entity.setTotalHuruf(counter.getTotalHuruf());
+        entity.setCreatedAt(LocalDateTime.now());
+
+        CharAnalysis saved = charAnalysisRepository.save(entity);
+        return CharAnalysisResponse.from(saved, counter.toMap());
     }
 
     private CharAnalysisResponse toResponse(CharAnalysis data) {

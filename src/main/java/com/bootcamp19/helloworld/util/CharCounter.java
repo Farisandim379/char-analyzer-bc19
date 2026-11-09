@@ -35,7 +35,9 @@ public class CharCounter {
     public Map<Character, Integer> toMap() {
         Map<Character, Integer> map = new LinkedHashMap<>();
         for (int i = 0; i < 26; i++) {
-            map.put((char) ('a' + i), freq[i]);
+            if (freq[i] > 0) {
+                map.put((char) ('a' + i), freq[i]);
+            }
         }
         return map;
     }

@@ -13,7 +13,7 @@ public class BaseResponse<T> {
     private T data;
 
     public static <T> BaseResponse<T> ok(T data) {
-        return new BaseResponse<>("sukses", "OK", data);
+        return new BaseResponse<>("success", "OK", data);
     }
 
     public static <T> BaseResponse<T> error(String message) {
