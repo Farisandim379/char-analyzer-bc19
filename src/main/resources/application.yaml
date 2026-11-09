@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: helloworld
+  datasource:
+    url: jdbc:postgresql://localhost:5432/belajar_db
+    username: dev
+    password: devpassword
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+server:
+  port: 8081
