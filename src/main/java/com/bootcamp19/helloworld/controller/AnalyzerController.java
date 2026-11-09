@@ -32,6 +32,16 @@ public class AnalyzerController {
         return BaseResponse.ok(charAnalysisService.simpan(request));
     }
 
+    @GetMapping("/minimal")
+    public BaseResponse<List<CharAnalysisResponse>> getMinimal(@RequestParam int min) {
+        return BaseResponse.ok(charAnalysisService.getMinimal(min));
+    }
+
+    @GetMapping("/terbaru")
+    public BaseResponse<List<CharAnalysisResponse>> getTerbaru() {
+        return BaseResponse.ok(charAnalysisService.getTerbaru());
+    }
+
     @GetMapping("/{id}")
     public BaseResponse<CharAnalysisResponse> getById(@PathVariable Long id) {
         return charAnalysisService.getById(id)

@@ -12,4 +12,8 @@ public interface CharAnalysisService {
     CharAnalysisResponse simpan(CharAnalysisRequest request);
 
     Optional<CharAnalysisResponse> getById(Long id);
+
+    List<CharAnalysisResponse> getMinimal(int min);
+
+    List<CharAnalysisResponse> getTerbaru();
 }

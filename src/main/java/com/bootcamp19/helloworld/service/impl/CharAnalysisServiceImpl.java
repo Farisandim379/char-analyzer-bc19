@@ -56,6 +56,26 @@ public class CharAnalysisServiceImpl implements CharAnalysisService {
                 .map(this::toResponse);
     }
 
+    @Override
+    public List<CharAnalysisResponse> getMinimal(int min) {
+        List<CharAnalysis> list = charAnalysisRepository.findByMinimalHuruf(min);
+        List<CharAnalysisResponse> hasil = new ArrayList<>();
+        for (CharAnalysis data : list) {
+            hasil.add(toResponse(data));
+        }
+        return hasil;
+    }
+
+    @Override
+    public List<CharAnalysisResponse> getTerbaru() {
+        List<CharAnalysis> list = charAnalysisRepository.findTop5Terbaru();
+        List<CharAnalysisResponse> hasil = new ArrayList<>();
+        for (CharAnalysis data : list) {
+            hasil.add(toResponse(data));
+        }
+        return hasil;
+    }
+
     private CharAnalysisResponse toResponse(CharAnalysis data) {
         CharCounter counter = new CharCounter(data.getKalimat());
         return CharAnalysisResponse.from(data, counter.toMap());
