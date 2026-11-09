@@ -31,4 +31,11 @@ public class AnalyzerController {
         log.info("X-Request-Id: {}, kalimat: {}", requestId, request != null ? request.getKalimat() : null);
         return BaseResponse.ok(charAnalysisService.simpan(request));
     }
+
+    @GetMapping("/{id}")
+    public BaseResponse<CharAnalysisResponse> getById(@PathVariable Long id) {
+        return charAnalysisService.getById(id)
+                .map(BaseResponse::ok)
+                .orElseGet(() -> BaseResponse.error("Data dengan id " + id + " tidak ditemukan"));
+    }
 }

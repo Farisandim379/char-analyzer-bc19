@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +48,12 @@ public class CharAnalysisServiceImpl implements CharAnalysisService {
 
         CharAnalysis saved = charAnalysisRepository.save(entity);
         return CharAnalysisResponse.from(saved, counter.toMap());
+    }
+
+    @Override
+    public Optional<CharAnalysisResponse> getById(Long id) {
+        return charAnalysisRepository.findById(id)
+                .map(this::toResponse);
     }
 
     private CharAnalysisResponse toResponse(CharAnalysis data) {
