@@ -17,4 +17,6 @@ public interface CharAnalysisService {
     List<CharAnalysisResponse> getTerbaru();
 
     CharAnalysisResponse analisisDariQuote();
+
+    List<CharAnalysisResponse> analisisBatchDariQuote(int jumlah);
 }

@@ -17,8 +17,8 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(QuoteUnavailableException.class)
-    public ResponseEntity<BaseResponse<Object>> handleQuoteUnavaliableException(QuoteUnavailableException quoteUnavailableException){
-       log.info("Coba quteunavaliable: {}", quoteUnavailableException.getMessage());
+    public ResponseEntity<BaseResponse<Object>> handleQuoteUnavaliableException(QuoteUnavailableException quoteUnavailableException) {
+        log.info("Coba quote unavailable: {}", quoteUnavailableException.getMessage());
         return build(HttpStatus.SERVICE_UNAVAILABLE, quoteUnavailableException.getMessage());
     }
 
@@ -29,6 +29,11 @@ public class GlobalExceptionHandler {
             message.add(fieldError.getDefaultMessage());
         }
         return build(HttpStatus.BAD_REQUEST, String.join(", ", message));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<BaseResponse<Object>> handleBadRequest(IllegalArgumentException exception) {
+        return build(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(AnalysisNotFoundException.class)

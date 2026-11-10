@@ -3,6 +3,7 @@ package com.bootcamp19.helloworld.controller;
 import com.bootcamp19.helloworld.dto.request.CharAnalysisRequest;
 import com.bootcamp19.helloworld.dto.response.BaseResponse;
 import com.bootcamp19.helloworld.dto.response.CharAnalysisResponse;
+import com.bootcamp19.helloworld.entity.CharAnalysis;
 import com.bootcamp19.helloworld.service.CharAnalysisService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -52,5 +53,10 @@ public class AnalyzerController {
     @PostMapping("/from-quote")
     public BaseResponse<CharAnalysisResponse> analisisDariQuote() {
         return BaseResponse.ok(charAnalysisService.analisisDariQuote());
+    }
+
+    @PostMapping("/from-quote/batch/{jumlah}")
+    public BaseResponse<List<CharAnalysisResponse>> analisisBatchDariQuote(@PathVariable int jumlah) {
+        return BaseResponse.ok(charAnalysisService.analisisBatchDariQuote(jumlah));
     }
 }
