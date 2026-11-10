@@ -4,16 +4,17 @@ import com.bootcamp19.helloworld.dto.request.CharAnalysisRequest;
 import com.bootcamp19.helloworld.dto.response.CharAnalysisResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CharAnalysisService {
     List<CharAnalysisResponse> cari(String kata);
 
-    CharAnalysisResponse simpan(CharAnalysisRequest request);
+    CharAnalysisResponse getById(Long id);
 
-    Optional<CharAnalysisResponse> getById(Long id);
+    CharAnalysisResponse analisis(CharAnalysisRequest request);
 
     List<CharAnalysisResponse> getMinimal(int min);
 
     List<CharAnalysisResponse> getTerbaru();
+
+    CharAnalysisResponse analisisDariQuote();
 }

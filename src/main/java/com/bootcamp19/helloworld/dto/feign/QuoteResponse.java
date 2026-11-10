@@ -1,0 +1,13 @@
+package com.bootcamp19.helloworld.dto.feign;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class QuoteResponse {
+    private Long id;
+    private String quote;
+    private String author;
+}

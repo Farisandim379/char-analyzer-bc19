@@ -10,6 +10,8 @@ import java.util.List;
 public interface CharAnalysisRepository extends JpaRepository<CharAnalysis, Long> {
     List<CharAnalysis> findByKalimatContainingIgnoreCase(String kata);
 
+    boolean existsByKalimatIgnoreCase(String kalimat);
+
     // Query JPQL (menggunakan nama Entity Java dan field Java)
     @Query("SELECT c FROM CharAnalysis c WHERE c.totalHuruf >= :min")
     List<CharAnalysis> findByMinimalHuruf(@Param("min") int min);

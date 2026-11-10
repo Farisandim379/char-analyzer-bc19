@@ -4,6 +4,7 @@ import com.bootcamp19.helloworld.dto.request.CharAnalysisRequest;
 import com.bootcamp19.helloworld.dto.response.BaseResponse;
 import com.bootcamp19.helloworld.dto.response.CharAnalysisResponse;
 import com.bootcamp19.helloworld.service.CharAnalysisService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,12 @@ public class AnalyzerController {
     }
 
     @PostMapping
-    public BaseResponse<CharAnalysisResponse> simpan(
+    public BaseResponse<CharAnalysisResponse> analisis(
             @RequestHeader(value = "X-Request-Id", required = false) String requestId,
-            @RequestBody CharAnalysisRequest request
+            @Valid @RequestBody CharAnalysisRequest request
     ) {
         log.info("X-Request-Id: {}, kalimat: {}", requestId, request != null ? request.getKalimat() : null);
-        return BaseResponse.ok(charAnalysisService.simpan(request));
+        return BaseResponse.ok(charAnalysisService.analisis(request));
     }
 
     @GetMapping("/minimal")
@@ -44,8 +45,12 @@ public class AnalyzerController {
 
     @GetMapping("/{id}")
     public BaseResponse<CharAnalysisResponse> getById(@PathVariable Long id) {
-        return charAnalysisService.getById(id)
-                .map(BaseResponse::ok)
-                .orElseGet(() -> BaseResponse.error("Data dengan id " + id + " tidak ditemukan"));
+        CharAnalysisResponse hasil = charAnalysisService.getById(id);
+        return BaseResponse.ok(hasil);
+    }
+
+    @PostMapping("/from-quote")
+    public BaseResponse<CharAnalysisResponse> analisisDariQuote() {
+        return BaseResponse.ok(charAnalysisService.analisisDariQuote());
     }
 }
